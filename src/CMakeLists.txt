@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.15)
+cmake_minimum_required(VERSION 3.15...3.28)
 project(Video2Text VERSION 1.0)
 
 add_library(video2text_compiler_flags INTERFACE)
@@ -13,10 +13,15 @@ target_compile_options(video2text_compiler_flags INTERFACE
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-add_subdirectory(iod)
+find_package(OpenCV REQUIRED)
+MESSAGE(STATUS "OpenCV included dirs ${OpenCV_INCLUDE_DIRS}")
+MESSAGE(STATUS "OpenCV linked libraries ${OpenCV_LIBS}")
+
+add_subdirectory(video)
+add_subdirectory(image)
 
 add_executable(video2text main.cpp)
 
-target_link_libraries(video2text PUBLIC iod video2text_compiler_flags)
+target_link_libraries(video2text PUBLIC video image video2text_compiler_flags)
 
 target_include_directories(video2text PUBLIC ${PROJECT_BINARY_DIR})
