@@ -2,10 +2,8 @@
 #include <string>
 #include "iostream"
 
-class IOD
+namespace image
 {
-public:
-    IOD();
-    ~IOD();
-    std::vector<cv::Rect> getContours(const std::string&);
-};
+  std::vector<cv::Rect> detectContours(const cv::Mat&);
+  void renderContours(const cv::Mat&, const std::vector<cv::Rect>&);
+}

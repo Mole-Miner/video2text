@@ -5,8 +5,9 @@
 #include <opencv2/video.hpp>
 #include <opencv2/videoio/videoio.hpp>
 #include <opencv2/highgui.hpp>
+#include "../image/image.hpp"
 
 namespace video
 {
-  void liveCapture();
+  void liveCapture(cv::Mat&);
 }

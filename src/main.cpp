@@ -4,7 +4,9 @@
 
 int main(void)
 {
-  video::liveCapture();
+  cv::Mat frame;
+  video::liveCapture(frame);
+  // image::detectContours(frame);
   // const std::string currentDir = std::filesystem::current_path().generic_string();
   // const std::string imgPath = currentDir + "/../images/small.jpg";
   //
