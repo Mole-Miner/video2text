@@ -1,4 +1,14 @@
 #include "image.hpp"
+#include <opencv2/imgproc.hpp>
+
+void image::renderContoursExt(const cv::Mat& frame, const std::vector<std::vector<cv::Rect>>& contours)
+{
+  for (size_t i = 0; i < contours.size(); i++)
+  {
+    const cv::Rect rect = cv::boundingRect(contours[i]);
+    cv::rectangle(frame, rect, cv::Scalar(0, 255, 0), 3, 8, 0);
+  }
+}
 
 void image::renderContours(const cv::Mat& frame, const std::vector<cv::Rect>& bound)
 {
@@ -6,6 +16,19 @@ void image::renderContours(const cv::Mat& frame, const std::vector<cv::Rect>& bo
   {
     cv::rectangle(frame, bound[i], cv::Scalar(0, 255, 0), 3, 8, 0);
   }
+}
+
+std::vector<std::vector<cv::Rect>> image::detectContoursExt(const cv::Mat& frame)
+{
+  cv::Mat gray, threshold, kernel, dilation;
+  std::vector<std::vector<cv::Rect>> contours;
+  cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
+  cv::threshold(gray, threshold, 0, 255, cv::THRESH_OTSU | cv::THRESH_BINARY_INV);
+  kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(15, 3));
+  cv::dilate(threshold, dilation, kernel);
+  cv::findContours(dilation, contours, 0, 1);
+  std::cout << contours.size() << std::endl;
+  return contours;
 }
 
 std::vector<cv::Rect> image::detectContours(const cv::Mat& frame)

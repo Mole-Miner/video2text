@@ -17,11 +17,15 @@ find_package(OpenCV REQUIRED)
 MESSAGE(STATUS "OpenCV included dirs ${OpenCV_INCLUDE_DIRS}")
 MESSAGE(STATUS "OpenCV linked libraries ${OpenCV_LIBS}")
 
+find_package(PkgConfig REQUIRED)
+pkg_search_module(Tesseract REQUIRED tesseract)
+pkg_search_module(Leptonica REQUIRED lept)
+
 add_subdirectory(video)
 add_subdirectory(image)
 
 add_executable(video2text main.cpp)
 
-target_link_libraries(video2text PUBLIC video image video2text_compiler_flags)
+target_link_libraries(video2text PUBLIC tesseract lept video image video2text_compiler_flags)
 
 target_include_directories(video2text PUBLIC ${PROJECT_BINARY_DIR})
