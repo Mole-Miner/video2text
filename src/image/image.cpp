@@ -1,5 +1,4 @@
 #include "image.hpp"
-#include <opencv2/imgproc.hpp>
 
 void image::renderContoursExt(const cv::Mat& frame, const std::vector<std::vector<cv::Rect>>& contours)
 {
@@ -27,7 +26,6 @@ std::vector<std::vector<cv::Rect>> image::detectContoursExt(const cv::Mat& frame
   kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(15, 3));
   cv::dilate(threshold, dilation, kernel);
   cv::findContours(dilation, contours, 0, 1);
-  std::cout << contours.size() << std::endl;
   return contours;
 }
 
