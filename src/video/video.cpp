@@ -1,7 +1,8 @@
 #include "video.hpp"
 
-void video::liveCapture(cv::Mat& frame)
+cv::Mat video::live(const std::function<void(const cv::Mat&)> onFrame)
 {
+  cv::Mat frame;
   cv::VideoCapture videoCapture;
   const int deviceID = 0;
   const int apiID = cv::CAP_ANY;
@@ -19,12 +20,11 @@ void video::liveCapture(cv::Mat& frame)
       std::cerr << "Blank frame\n";
       break;
     }
-    const std::vector<cv::Rect> bound = image::detectContours(frame);
-    image::renderContours(frame, bound);
-    cv::imshow("Frame", frame);
+    onFrame(frame);
     if (cv::waitKey(5) >= 0)
     {
       break;
     }
   }
+  return frame;
 }

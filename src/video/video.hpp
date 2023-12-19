@@ -1,5 +1,5 @@
 #include <iostream>
-#include <sstream>
+#include <functional>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/video.hpp>
@@ -9,5 +9,5 @@
 
 namespace video
 {
-  void liveCapture(cv::Mat&);
+  cv::Mat live(std::function<void(const cv::Mat&)>);
 }
