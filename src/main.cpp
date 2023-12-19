@@ -15,10 +15,9 @@ int main(int argc, char** argv)
   };
   const cv::Mat frame = video::live(onFrame);
   const std::vector<cv::Rect> contours = image::findContours(frame);
-  const std::string outputName = "found_text.txt";
-  const std::string outputPath = std::filesystem::current_path().generic_string() + outputName;
+  const std::string outputPath = std::filesystem::current_path().generic_string() + "found_text.txt";
   std::filesystem::remove(outputPath);
-  std::ofstream output(outputName);
+  std::ofstream output(outputPath);
   for (const auto& contour : contours)
   {
     const cv::Mat roi = frame(contour);
