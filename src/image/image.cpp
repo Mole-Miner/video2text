@@ -1,35 +1,14 @@
 #include "image.hpp"
 
-void image::renderContoursExt(const cv::Mat& frame, const std::vector<std::vector<cv::Rect>>& contours)
+void image::renderContours(const cv::Mat& frame, const std::vector<cv::Rect>& contours)
 {
   for (size_t i = 0; i < contours.size(); i++)
   {
-    const cv::Rect rect = cv::boundingRect(contours[i]);
-    cv::rectangle(frame, rect, cv::Scalar(0, 255, 0), 3, 8, 0);
+    cv::rectangle(frame, contours[i], cv::Scalar(0, 255, 0), 3, 8, 0);
   }
 }
 
-void image::renderContours(const cv::Mat& frame, const std::vector<cv::Rect>& bound)
-{
-  for (size_t i = 0; i < bound.size(); i++)
-  {
-    cv::rectangle(frame, bound[i], cv::Scalar(0, 255, 0), 3, 8, 0);
-  }
-}
-
-std::vector<std::vector<cv::Rect>> image::detectContoursExt(const cv::Mat& frame)
-{
-  cv::Mat gray, threshold, kernel, dilation;
-  std::vector<std::vector<cv::Rect>> contours;
-  cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);
-  cv::threshold(gray, threshold, 0, 255, cv::THRESH_OTSU | cv::THRESH_BINARY_INV);
-  kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(15, 3));
-  cv::dilate(threshold, dilation, kernel);
-  cv::findContours(dilation, contours, 0, 1);
-  return contours;
-}
-
-std::vector<cv::Rect> image::detectContours(const cv::Mat& frame)
+std::vector<cv::Rect> image::findContours(const cv::Mat& frame)
 {
   cv::Mat gray, sobel, threshold, kernel;
   cv::cvtColor(frame, gray, cv::COLOR_BGR2GRAY);

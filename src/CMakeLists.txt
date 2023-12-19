@@ -23,9 +23,10 @@ pkg_search_module(Leptonica REQUIRED lept)
 
 add_subdirectory(video)
 add_subdirectory(image)
+add_subdirectory(ocr)
 
 add_executable(video2text main.cpp)
 
-target_link_libraries(video2text PUBLIC tesseract lept video image video2text_compiler_flags)
+target_link_libraries(video2text PUBLIC video image ocr video2text_compiler_flags)
 
 target_include_directories(video2text PUBLIC ${PROJECT_BINARY_DIR})
