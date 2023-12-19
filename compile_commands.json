@@ -1,7 +1,7 @@
 [
 {
   "directory": "/home/grotesque/video2text/build",
-  "command": "/usr/bin/c++  -I/home/grotesque/video2text/build -I/home/grotesque/video2text/src/video -I/home/grotesque/video2text/src/image -isystem /usr/local/include/opencv4 -Wall -Wextra -Wshadow -Wformat=2 -Wunused -o CMakeFiles/video2text.dir/main.cpp.o -c /home/grotesque/video2text/src/main.cpp",
+  "command": "/usr/bin/c++  -I/home/grotesque/video2text/build -I/home/grotesque/video2text/src/video -I/home/grotesque/video2text/src/image -I/home/grotesque/video2text/src/ocr -isystem /usr/local/include/opencv4 -Wall -Wextra -Wshadow -Wformat=2 -Wunused -o CMakeFiles/video2text.dir/main.cpp.o -c /home/grotesque/video2text/src/main.cpp",
   "file": "/home/grotesque/video2text/src/main.cpp"
 },
 {
@@ -13,5 +13,10 @@
   "directory": "/home/grotesque/video2text/build/image",
   "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4 -Wall -Wextra -Wshadow -Wformat=2 -Wunused -o CMakeFiles/image.dir/image.cpp.o -c /home/grotesque/video2text/src/image/image.cpp",
   "file": "/home/grotesque/video2text/src/image/image.cpp"
+},
+{
+  "directory": "/home/grotesque/video2text/build/ocr",
+  "command": "/usr/bin/c++  -isystem /usr/local/include/opencv4 -Wall -Wextra -Wshadow -Wformat=2 -Wunused -o CMakeFiles/ocr.dir/ocr.cpp.o -c /home/grotesque/video2text/src/ocr/ocr.cpp",
+  "file": "/home/grotesque/video2text/src/ocr/ocr.cpp"
 }
 ]

@@ -25,4 +25,5 @@ int main(int argc, char** argv)
     const std::string text = ocr::findText(roi);
     output << text << std::endl;
   }
+  output.close();
 }
