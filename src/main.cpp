@@ -9,7 +9,6 @@ void videoHandler(const cv::Mat& frame);
 
 void extractText(const cv::Mat& frame, std::vector<cv::Rect>& contours);
 
-
 int main(int argc, char** argv)
 {
   const cv::Mat frame = video::live(videoHandler);
