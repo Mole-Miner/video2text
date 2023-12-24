@@ -1,20 +1,32 @@
 #include <fstream>
 #include <filesystem>
+#include <thread>
 #include "video/video.hpp"
 #include "image/image.hpp"
 #include "ocr/ocr.hpp"
 
+void videoHandler(const cv::Mat& frame);
+
+void extractText(const cv::Mat& frame, std::vector<cv::Rect>& contours);
+
+
 int main(int argc, char** argv)
 {
-  const auto onFrame = [](const cv::Mat& frame)
-  {
-    const cv::Mat frameClone = frame.clone();
-    const std::vector<cv::Rect> contours = image::findContours(frameClone);
-    image::renderContours(frameClone, contours);
-    cv::imshow("Frame", frameClone);
-  };
-  const cv::Mat frame = video::live(onFrame);
+  const cv::Mat frame = video::live(videoHandler);
   std::vector<cv::Rect> contours = image::findContours(frame);
+  extractText(frame, contours);
+}
+
+void videoHandler(const cv::Mat& frame)
+{
+  const cv::Mat frameClone = frame.clone();
+  const std::vector<cv::Rect> contours = image::findContours(frameClone);
+  image::renderContours(frameClone, contours);
+  cv::imshow("Frame", frameClone);
+}
+
+void extractText(const cv::Mat& frame, std::vector<cv::Rect>& contours)
+{
   const std::string outputPath = std::filesystem::current_path().generic_string() + "/found_text.txt";
   std::filesystem::remove(outputPath);
   std::ofstream output(outputPath);
